@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Actividades</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/PaginaActividades.css" />
+  </head>
+  <body>
+    <div id="notification-container"></div>
+    <header>
+      <nav>
+        <div class="menu-icon" id="menuToggle">
+          <img src="img/personalizar.png" alt="Menú" class="menu-img" />
+        </div>
+        <button class="nav-btn active" data-section="gestion">
+          Gestión de Actividades
+        </button>
+        <button class="nav-btn" data-section="horario">Horario</button>
+        <button class="nav-btn" data-section="emocional">
+          Bienestar y Recomendaciones
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Gestión de Actividades -->
+      <section id="gestion" class="active">
+        <div class="section-header">
+          <h2>Actividades por prioridad</h2>
+          <button class="btn-primary" onclick="openTaskModal()">
+            + Nueva actividad
+          </button>
+        </div>
+
+        <div class="board">
+          <div class="priority-column alta">
+            <div class="column-header">
+              <span>Prioridad Alta</span>
+              <span class="count" id="count-alta">0</span>
+            </div>
+            <div class="column-content" id="tasks-alta">
+              <div class="empty-state">No hay actividades</div>
+            </div>
+          </div>
+
+          <div class="priority-column media">
+            <div class="column-header">
+              <span>Prioridad Media</span>
+              <span class="count" id="count-media">0</span>
+            </div>
+            <div class="column-content" id="tasks-media">
+              <div class="empty-state">No hay actividades</div>
+            </div>
+          </div>
+
+          <div class="priority-column baja">
+            <div class="column-header">
+              <span>Prioridad Baja</span>
+              <span class="count" id="count-baja">0</span>
+            </div>
+            <div class="column-content" id="tasks-baja">
+              <div class="empty-state">No hay actividades</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Horario Académico -->
+      <section id="horario">
+        <div class="section-header">
+          <h2>Horario</h2>
+          <div class="view-toggle">
+            <button class="toggle-btn active" onclick="changeView('week')">
+              Semanal
+            </button>
+            <button class="toggle-btn" onclick="changeView('month')">
+              Mensual
+            </button>
+          </div>
+        </div>
+
+        <!-- Vista Semanal -->
+        <div class="calendar-container" id="weekView">
+          <div class="calendar-header">
+            <button class="calendar-nav-btn" onclick="changeWeek(-1)">←</button>
+            <h3 id="weekTitle">Semana Actual</h3>
+            <button class="calendar-nav-btn" onclick="changeWeek(1)">→</button>
+          </div>
+
+          <div class="week-schedule">
+            <div class="time-column">
+              <div class="time-header"></div>
+              <div class="time-slot">7:00</div>
+              <div class="time-slot">8:00</div>
+              <div class="time-slot">9:00</div>
+              <div class="time-slot">10:00</div>
+              <div class="time-slot">11:00</div>
+              <div class="time-slot">12:00</div>
+              <div class="time-slot">13:00</div>
+              <div class="time-slot">14:00</div>
+              <div class="time-slot">15:00</div>
+              <div class="time-slot">16:00</div>
+              <div class="time-slot">17:00</div>
+              <div class="time-slot">18:00</div>
+              <div class="time-slot">19:00</div>
+              <div class="time-slot">20:00</div>
+            </div>
+            <div class="days-grid" id="daysGrid"></div>
+          </div>
+        </div>
+
+        <!-- Vista Mensual -->
+        <div class="calendar-container hidden" id="monthView">
+          <div class="calendar-header">
+            <button class="calendar-nav-btn" onclick="changeMonth(-1)">
+              ←
+            </button>
+            <h3 id="monthTitle">Noviembre 2025</h3>
+            <button class="calendar-nav-btn" onclick="changeMonth(1)">→</button>
+          </div>
+
+          <div class="calendar-weekdays">
+            <div class="weekday">Lun</div>
+            <div class="weekday">Mar</div>
+            <div class="weekday">Mié</div>
+            <div class="weekday">Jue</div>
+            <div class="weekday">Vie</div>
+            <div class="weekday">Sáb</div>
+            <div class="weekday">Dom</div>
+          </div>
+
+          <div class="calendar-days" id="monthGrid"></div>
+        </div>
+      </section>
+
+      <!-- Bienestar y Recomendaciones -->
+      <section id="emocional">
+        <div class="section-header">
+          <h2>Bienestar y Recomendaciones</h2>
+        </div>
+
+        <div class="wellness-grid">
+          <!-- Control de Estrés -->
+          <div class="wellness-card">
+            <h3>¿Cómo te sientes hoy?</h3>
+            <div class="mood-selector">
+              <div
+                class="mood-option"
+                data-mood="excelente"
+                onclick="selectMood('excelente')"
+              >
+                <span class="mood-emoji">😊</span>
+                <span class="mood-label">Excelente</span>
+              </div>
+              <div
+                class="mood-option"
+                data-mood="bien"
+                onclick="selectMood('bien')"
+              >
+                <span class="mood-emoji">🙂</span>
+                <span class="mood-label">Bien</span>
+              </div>
+              <div
+                class="mood-option"
+                data-mood="regular"
+                onclick="selectMood('regular')"
+              >
+                <span class="mood-emoji">😐</span>
+                <span class="mood-label">Regular</span>
+              </div>
+              <div
+                class="mood-option"
+                data-mood="estresado"
+                onclick="selectMood('estresado')"
+              >
+                <span class="mood-emoji">😰</span>
+                <span class="mood-label">Estresado</span>
+              </div>
+              <div
+                class="mood-option"
+                data-mood="ansioso"
+                onclick="selectMood('ansioso')"
+              >
+                <span class="mood-emoji">😟</span>
+                <span class="mood-label">Ansioso</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nivel de Estrés -->
+          <div class="wellness-card">
+            <h3>Nivel de Estrés Académico</h3>
+            <div class="stress-meter">
+              <div class="stress-bar" id="stressBar"></div>
+              <div class="stress-label" id="stressLabel">Bajo</div>
+            </div>
+            <p class="stress-info">Basado en tus actividades y horario</p>
+          </div>
+
+          <!-- Momento más activo -->
+          <div class="wellness-card">
+            <h3>Tu momento más activo</h3>
+            <div class="peak-time" id="peakTime">
+              <span class="peak-icon">⏰</span>
+              <span class="peak-label">Analizando tu horario...</span>
+            </div>
+            <p class="peak-info">
+              Según tu horario académico y actividades completadas
+            </p>
+          </div>
+
+          <!-- Recomendaciones -->
+          <div class="wellness-card full-width">
+            <h3>Recomendaciones Personalizadas</h3>
+            <div id="recommendations">
+              <div class="recommendation-item">
+                <span class="rec-icon">💡</span>
+                <div class="rec-content">
+                  <strong>Selecciona tu estado de ánimo</strong>
+                  <p>
+                    Te daremos recomendaciones personalizadas para mejorar tu
+                    bienestar académico
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Nueva Actividad -->
+    <div class="overlay" id="taskOverlay" onclick="closeTaskModal()"></div>
+    <div class="modal" id="taskModal">
+      <div class="modal-header">
+        <h3>Nueva Actividad</h3>
+        <button class="btn-close" onclick="closeTaskModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="taskForm" onsubmit="addTask(event)">
+          <div class="form-group">
+            <label>Nombre de la actividad</label>
+            <input
+              type="text"
+              name="title"
+              required
+              placeholder="Ej: Proyecto de programación"
+            />
+          </div>
+          <div class="form-group">
+            <label>Materia</label>
+            <input
+              type="text"
+              name="subject"
+              required
+              placeholder="Ej: Ingeniería de Software"
+            />
+          </div>
+          <div class="form-group">
+            <label>Prioridad</label>
+            <select name="priority" required>
+              <option value="alta">Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fecha de entrega</label>
+            <input type="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label>Descripción (opcional)</label>
+            <textarea
+              name="description"
+              placeholder="Detalles adicionales..."
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeTaskModal()"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Crear actividad</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Agregar Horario -->
+    <div
+      class="overlay"
+      id="scheduleOverlay"
+      onclick="closeScheduleModal()"
+    ></div>
+    <div class="modal" id="scheduleModal">
+      <div class="modal-header">
+        <h3>Agregar Clase</h3>
+        <button class="btn-close" onclick="closeScheduleModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="scheduleForm" onsubmit="addScheduleSlot(event)">
+          <input type="hidden" name="day" id="scheduleDay" />
+          <div class="form-group">
+            <label>Materia</label>
+            <input
+              type="text"
+              name="subject"
+              required
+              placeholder="Ej: Cálculo"
+            />
+          </div>
+          <div class="form-group">
+            <label>Hora de inicio</label>
+            <input type="time" name="startTime" required />
+          </div>
+          <div class="form-group">
+            <label>Hora de fin</label>
+            <input type="time" name="endTime" required />
+          </div>
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeScheduleModal()"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Agregar clase</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="back-button-container">
+      <a href="paginaPrincipal.html" class="back-button"> Volver al Inicio </a>
+    </div>
+    <footer class="footer">
+      <p>Gestiona tus actividades - UAO</p>
+    </footer>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Panel flotante -->
+    <aside class="custom-panel" id="customPanel">
+      <h3>Personaliza tu página</h3>
+      <p>Elige el color que más te guste:</p>
+      <input type="color" id="colorPicker" value="#81c784" />
+      <button id="resetBtn" class="panel-btn">Restaurar colores</button>
+    </aside>
+
+    <script src="actividades.js"></script>
+  </body>
+</html>

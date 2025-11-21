@@ -1,0 +1,789 @@
+/* Fuente base */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #fdfdf6;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.menu-icon {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  padding: 8px; /* Espacio alrededor */
+  border-radius: 50%; /* Forma redonda */
+  background: rgba(255, 255, 255, 0.2); /* Fondo suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+.menu-icon .menu-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: 0.3s ease;
+}
+
+/* Glow */
+.menu-icon:hover .menu-img {
+  filter: drop-shadow(0 0 12px #81c784) drop-shadow(0 0 20px #81c784)
+    drop-shadow(0 0 28px #81c784);
+  transform: scale(1.15);
+}
+/* ===============================
+   PANEL DE PERSONALIZACIÓN CENTRADO
+   =============================== */
+
+/* Ícono hamburguesa en el header */
+.menu-icon {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin-left: 20px; /* IZQUIERDA */
+  margin-right: 0; /* Ningún margen derecho */
+}
+
+.menu-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.menu-img {
+  width: 40px;
+  height: 40px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* Glow al pasar el mouse */
+.menu-img:hover {
+  filter: drop-shadow(0 0 12px #81c784) drop-shadow(0 0 20px #81c784)
+    drop-shadow(0 0 28px #81c784);
+  transform: scale(1.08);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel flotante CENTRADO */
+.custom-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  max-width: 92vw;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 30px 24px;
+  border-radius: 20px;
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2002;
+  text-align: center;
+  border: 3px solid #81c784;
+}
+
+.custom-panel.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-panel h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.custom-panel h3::before {
+  content: "";
+  font-size: 28px;
+}
+
+.custom-panel p {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+/* Input de color */
+.custom-panel input[type="color"] {
+  width: 100%;
+  height: 60px;
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-panel input[type="color"]:hover {
+  border-color: #81c784;
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(129, 199, 132, 0.2);
+}
+
+.custom-panel input[type="color"]:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+/* Botón dentro del panel */
+.panel-btn {
+  margin-top: 20px;
+  padding: 14px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #81c784, #4bc0c0);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(129, 199, 132, 0.3);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.panel-btn::before {
+  content: "🔄";
+  font-size: 18px;
+}
+
+.panel-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(129, 199, 132, 0.4);
+  background: linear-gradient(135deg, #66bb6a, #3fa89f);
+}
+
+.panel-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Animación de entrada */
+@keyframes panelEntrance {
+  from {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .custom-panel {
+    width: 90vw;
+    max-width: 340px;
+    padding: 24px 20px;
+  }
+
+  .menu-icon {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  .menu-img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+  }
+
+  .custom-panel h3 {
+    font-size: 20px;
+  }
+}
+/* Barra de navegación con flores */
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #81c784;
+  padding: 25px 30px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Contenedor de flores en el nav */
+.flowers-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.flower {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: bloom 4s ease-in-out infinite;
+}
+
+.flower:nth-child(1) {
+  left: 10%;
+  top: 50%;
+  animation-delay: 0s;
+}
+
+.flower:nth-child(2) {
+  left: 25%;
+  top: 50%;
+  animation-delay: 0.5s;
+}
+
+.flower:nth-child(3) {
+  left: 50%;
+  top: 50%;
+  animation-delay: 1s;
+}
+
+.flower:nth-child(4) {
+  left: 75%;
+  top: 50%;
+  animation-delay: 1.5s;
+}
+
+.flower:nth-child(5) {
+  left: 90%;
+  top: 50%;
+  animation-delay: 2s;
+}
+
+/* Pétalos de la flor */
+.petal {
+  position: absolute;
+  width: 14px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50% 50% 0 0;
+  top: 50%;
+  left: 50%;
+  transform-origin: center bottom;
+  transform: translate(-50%, -100%) rotate(var(--rotation)) translateY(-2px);
+  opacity: 0;
+  animation: petalBloom 4s ease-in-out infinite;
+}
+
+.petal:nth-child(1) {
+  --rotation: 0deg;
+}
+
+.petal:nth-child(2) {
+  --rotation: 72deg;
+  animation-delay: 0.1s;
+}
+
+.petal:nth-child(3) {
+  --rotation: 144deg;
+  animation-delay: 0.2s;
+}
+
+.petal:nth-child(4) {
+  --rotation: 216deg;
+  animation-delay: 0.3s;
+}
+
+.petal:nth-child(5) {
+  --rotation: 288deg;
+  animation-delay: 0.4s;
+}
+
+/* Centro de la flor */
+.flower-center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd54f;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: centerBloom 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* Animación de florecimiento general */
+@keyframes bloom {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de pétalos */
+@keyframes petalBloom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -100%) rotate(var(--rotation, 0deg))
+      translateY(-2px) scale(0);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translate(-50%, -100%) rotate(var(--rotation, 0deg))
+      translateY(-2px) scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -100%) rotate(var(--rotation, 0deg))
+      translateY(-2px) scale(1);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translate(-50%, -100%) rotate(var(--rotation, 0deg))
+      translateY(-2px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100%) rotate(var(--rotation, 0deg))
+      translateY(-2px) scale(0);
+  }
+}
+
+/* Animación del centro */
+@keyframes centerBloom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+/* Asegurar que el contenido del nav esté sobre las flores */
+nav > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Contenido principal */
+main {
+  flex: 1;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #2e7d32;
+  text-align: center;
+  font-weight: 600;
+}
+
+main > p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 35px;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input,
+textarea {
+  padding: 15px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  background-color: #fdfdf6;
+  color: #333;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #81c784;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.15);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #81c784, #4bc0c0);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+button:active {
+  transform: translateY(0) scale(1);
+}
+
+/* Botón de volver a inicio */
+.btn-back {
+  display: inline-block;
+  padding: 10px 24px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 20px;
+  background: #81c784;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(129, 199, 132, 0.3);
+}
+
+.btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(129, 199, 132, 0.4);
+  background: #66bb6a;
+}
+
+.btn-back:active {
+  transform: translateY(0);
+}
+/* ===============================
+   NOTIFICACIONES TOAST (ESQUINA)
+   =============================== */
+#notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  pointer-events: none;
+  max-width: 400px;
+}
+
+.notification {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: auto;
+  border-left: 4px solid;
+  position: relative;
+  min-width: 320px;
+}
+
+.notification.success {
+  border-left-color: #4caf50;
+  background: #fff;
+}
+
+.notification.error {
+  border-left-color: #f44336;
+  background: #fff;
+}
+
+.notification.info {
+  border-left-color: #2196f3;
+  background: #fff;
+}
+
+.notification-icon {
+  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.notification.success .notification-icon {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.notification.error .notification-icon {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.notification.info .notification-icon {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.notification-content {
+  flex: 1;
+  padding-right: 25px;
+}
+
+.notification-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.notification-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.notification-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #9ca3af;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+
+.notification-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1f2937;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+/* Footer */
+footer {
+  background: #81c784;
+  color: #fff;
+  padding: 40px 20px 20px;
+  margin-top: 40px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+.footer-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #fff;
+  grid-column: 1 / -1;
+  text-align: center;
+}
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.footer-section p {
+  margin: 8px 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.footer-section strong {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #f1f8f4;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsivo */
+@media (min-width: 1024px) {
+  footer .footer-content .footer-section h2 {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    margin: 30px 20px;
+    padding: 30px 20px;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  main > p {
+    font-size: 1rem;
+  }
+
+  nav {
+    padding: 20px 20px;
+  }
+
+  .flower {
+    width: 30px;
+    height: 30px;
+  }
+
+  .petal {
+    width: 10px;
+    height: 15px;
+  }
+
+  .flower-center {
+    width: 8px;
+    height: 8px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+}

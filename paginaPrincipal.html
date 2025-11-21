@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienestar Universitario - Estrés</title>
+    <link rel="stylesheet" href="css/PaginaPrincipal.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="notification-container"></div>
+
+    <!-- Barra de navegación con icono hamburguesa -->
+    <header class="navbar">
+      <div class="menu-icon" id="menuToggle">
+        <img src="img/personalizar.png" alt="Menú" class="menu-img" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="paginaActividades.html">Tus Actividades</a></li>
+          <li><a href="paginaRecursos.html">Recursos</a></li>
+          <li><a href="paginaContacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Sección hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Encuentra tu equilibrio</h1>
+          <p>
+            Explora actividades diseñadas para reducir el estrés universitario y
+            mejorar tu bienestar
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selección de actividades -->
+    <section class="activities">
+      <h2>Actividades recomendadas</h2>
+      <div class="cards">
+        <!-- Meditación guiada -->
+        <div class="card">
+          <img src="img/meditacion.png" alt="Meditación" />
+          <h3>Meditación guiada</h3>
+          <p>
+            Sesiones breves para relajar tu mente y mejorar la concentración.
+          </p>
+          <button onclick="mostrarPanel('panel-meditacion')">Participar</button>
+          <div
+            class="panel-actividad"
+            id="panel-meditacion"
+            style="display: none"
+          >
+            <p>🧘 Selecciona tu horario para participar:</p>
+            <input type="time" id="meditation-time" />
+            <button onclick="iniciarMeditacion()">Entrar a la sesión</button>
+          </div>
+        </div>
+
+        <!-- Ejercicio físico -->
+        <div class="card">
+          <img src="img/corriendo.png" alt="Ejercicio" />
+          <h3>Ejercicio físico</h3>
+          <p>
+            Rutinas de estiramiento y actividad física ligera para liberar
+            tensión.
+          </p>
+          <button onclick="openExerciseModal()">Unirme</button>
+          <div
+            class="panel-actividad"
+            id="panel-ejercicio"
+            style="display: none"
+          >
+            <p>🏃 Elige tu rutina preferida:</p>
+            <select>
+              <option>Estiramiento matutino</option>
+              <option>Movilidad y caminata suave</option>
+            </select>
+            <button>Unirme a la rutina</button>
+          </div>
+        </div>
+
+        <!-- Taller artístico -->
+        <div class="card">
+          <img src="img/pasatiempo.png" alt="Arte" />
+          <h3>Taller artístico</h3>
+          <p>Explora tu creatividad con pintura, música o escritura.</p>
+          <button onclick="mostrarPanel('panel-taller')">Inscribirme</button>
+          <div class="panel-actividad" id="panel-taller" style="display: none">
+            <p>🎨 Selecciona el tipo de taller:</p>
+            <select>
+              <option>Pintura</option>
+              <option>Escritura</option>
+              <option>Música</option>
+            </select>
+            <button>Enviar inscripción</button>
+          </div>
+        </div>
+
+        <!-- Asesoría psicológica -->
+        <div class="card">
+          <img src="img/consultar.png" alt="Asesoría" />
+          <h3>Asesoría psicológica</h3>
+          <p>Espacios de escucha y acompañamiento profesional.</p>
+          <button onclick="mostrarPanel('panel-asesoria')">Agendar</button>
+          <div
+            class="panel-actividad"
+            id="panel-asesoria"
+            style="display: none"
+          >
+            <p>🧠 Selecciona fecha y hora para tu sesión:</p>
+            <input type="date" />
+            <input type="time" />
+            <button>Agendar sesión</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Panel flotante de personalización -->
+    <aside class="custom-panel" id="customPanel">
+      <h3>Personaliza tu página</h3>
+      <p>Elige el color que más te guste:</p>
+      <input type="color" id="colorPicker" value="#81c784" />
+      <button id="resetBtn" class="panel-btn">Restaurar colores</button>
+    </aside>
+
+    <!-- Modal de Meditación Guiada -->
+    <div class="meditation-overlay" id="meditationOverlay"></div>
+
+    <div class="meditation-modal" id="meditationModal">
+      <!-- Botón cerrar -->
+      <button class="meditation-close" id="closeMeditation">&times;</button>
+
+      <!-- Pantalla de selección -->
+      <div class="meditation-screen" id="selectionScreen">
+        <h2>🧘‍♀️ Meditación Guiada</h2>
+        <p class="meditation-subtitle">
+          Elige la duración de tu sesión de calma
+        </p>
+
+        <!-- Guía de postura -->
+        <div class="posture-guide">
+          <h3>Postura recomendada</h3>
+          <div class="posture-container">
+            <div class="posture-visual">
+              <svg viewBox="0 0 200 300" width="120" height="180">
+                <circle cx="100" cy="40" r="20" fill="#81c784" opacity="0.8" />
+                <line
+                  x1="100"
+                  y1="60"
+                  x2="100"
+                  y2="80"
+                  stroke="#66bb6a"
+                  stroke-width="8"
+                />
+                <rect
+                  x="85"
+                  y="80"
+                  width="30"
+                  height="60"
+                  rx="5"
+                  fill="#81c784"
+                  opacity="0.8"
+                />
+                <line
+                  x1="85"
+                  y1="90"
+                  x2="60"
+                  y2="120"
+                  stroke="#66bb6a"
+                  stroke-width="6"
+                />
+                <line
+                  x1="115"
+                  y1="90"
+                  x2="140"
+                  y2="120"
+                  stroke="#66bb6a"
+                  stroke-width="6"
+                />
+                <circle cx="60" cy="120" r="6" fill="#4caf50" />
+                <circle cx="140" cy="120" r="6" fill="#4caf50" />
+                <path
+                  d="M 85 140 Q 70 160 80 180 L 90 185"
+                  stroke="#66bb6a"
+                  stroke-width="8"
+                  fill="none"
+                />
+                <path
+                  d="M 115 140 Q 130 160 120 180 L 110 185"
+                  stroke="#66bb6a"
+                  stroke-width="8"
+                  fill="none"
+                />
+                <ellipse
+                  cx="100"
+                  cy="190"
+                  rx="50"
+                  ry="10"
+                  fill="#a5d6a7"
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+            <div class="posture-tips">
+              <div class="posture-tip">
+                <span class="tip-icon">✓</span>
+                <span>Espalda recta pero relajada</span>
+              </div>
+              <div class="posture-tip">
+                <span class="tip-icon">✓</span>
+                <span>Hombros hacia atrás y abajo</span>
+              </div>
+              <div class="posture-tip">
+                <span class="tip-icon">✓</span>
+                <span>Manos sobre las rodillas</span>
+              </div>
+              <div class="posture-tip">
+                <span class="tip-icon">✓</span>
+                <span>Mentón ligeramente hacia dentro</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="duration-options">
+          <button class="duration-btn" data-duration="5">
+            <span class="duration-time">5</span>
+            <span class="duration-label">minutos</span>
+            <span class="duration-desc">Pausa rápida</span>
+          </button>
+
+          <button class="duration-btn" data-duration="10">
+            <span class="duration-time">10</span>
+            <span class="duration-label">minutos</span>
+            <span class="duration-desc">Calma profunda</span>
+          </button>
+
+          <button class="duration-btn" data-duration="15">
+            <span class="duration-time">15</span>
+            <span class="duration-label">minutos</span>
+            <span class="duration-desc">Renovación total</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pantalla de meditación -->
+      <div class="meditation-screen hidden" id="meditationScreen">
+        <!-- Recordatorio de postura -->
+        <div class="posture-reminder">
+          <span class="posture-reminder-icon">🧘‍♀️</span>
+          <span class="posture-reminder-text"
+            >Espalda recta • Hombros relajados</span
+          >
+        </div>
+
+        <!-- Círculo de respiración animado -->
+        <div class="breath-container">
+          <div class="breath-circle" id="breathCircle">
+            <div class="breath-inner"></div>
+          </div>
+          <p class="breath-text" id="breathText">Inhala...</p>
+        </div>
+
+        <!-- Mensaje guiado -->
+        <p class="meditation-message" id="meditationMessage">
+          Bienvenida a tu espacio de calma
+        </p>
+
+        <!-- Tiempo restante -->
+        <div class="meditation-timer">
+          <span id="timeDisplay">5:00</span>
+        </div>
+
+        <!-- Controles -->
+        <div class="meditation-controls">
+          <button class="control-btn" id="playPauseBtn">
+            <span class="play-icon">▶</span>
+            <span class="pause-icon hidden">⏸</span>
+          </button>
+          <button class="control-btn" id="resetBtnMed">🔄</button>
+          <button class="control-btn" id="muteBtnMed">🔊</button>
+        </div>
+
+        <!-- Indicador de fase -->
+        <div class="phase-indicator">
+          <span class="phase-dot active"></span>
+          <span class="phase-dot"></span>
+          <span class="phase-dot"></span>
+          <span class="phase-dot"></span>
+          <span class="phase-dot"></span>
+        </div>
+      </div>
+    </div>
+    <!-- Modal de Ejercicio Físico -->
+    <div class="exercise-overlay" id="exerciseOverlay"></div>
+
+    <div class="exercise-modal" id="exerciseModal">
+      <!-- Botón cerrar -->
+      <button class="exercise-close" id="closeExercise">&times;</button>
+
+      <!-- Pantalla de selección de rutina -->
+      <div class="exercise-screen" id="exerciseSelectionScreen">
+        <h2>🏃‍♀️ Rutinas de Ejercicio</h2>
+        <p class="exercise-subtitle">Elige tu rutina para liberar el estrés</p>
+
+        <div class="routine-options">
+          <!-- Estiramiento matutino -->
+          <div class="routine-card" data-routine="morning">
+            <div class="routine-icon">🌅</div>
+            <h3>Estiramiento Matutino</h3>
+            <p class="routine-duration">5 minutos</p>
+            <ul class="routine-benefits">
+              <li>Respiración profunda</li>
+              <li>Estiramiento cuello y hombros</li>
+              <li>Movilidad de columna</li>
+              <li>Estiramiento de extremidades</li>
+            </ul>
+            <button class="routine-btn" onclick="iniciarRutina('morning')">
+              Comenzar rutina
+            </button>
+          </div>
+
+          <!-- Movilidad y caminata -->
+          <div class="routine-card" data-routine="mobility">
+            <div class="routine-icon">🚶‍♀️</div>
+            <h3>Movilidad y Caminata</h3>
+            <p class="routine-duration">5 minutos</p>
+            <ul class="routine-benefits">
+              <li>Movilidad articular completa</li>
+              <li>Caminata suave</li>
+              <li>Respiración diafragmática</li>
+              <li>Liberación de tensión</li>
+            </ul>
+            <button class="routine-btn" onclick="iniciarRutina('mobility')">
+              Comenzar rutina
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pantalla de ejercicio en progreso -->
+      <div class="exercise-screen hidden" id="exerciseProgressScreen">
+        <!-- Título de la rutina actual -->
+        <h3 class="current-routine-title" id="routineTitle">
+          Estiramiento Matutino
+        </h3>
+
+        <!-- Temporizador -->
+        <div class="exercise-timer">
+          <span id="exerciseTimeDisplay">5:00</span>
+        </div>
+
+        <!-- Animación del ejercicio -->
+        <div class="exercise-animation" id="exerciseAnimation">
+          <svg id="exerciseSVG" viewBox="0 0 300 400" width="250" height="350">
+            <!-- La figura se animará con JavaScript -->
+          </svg>
+        </div>
+
+        <!-- Instrucción actual -->
+        <div class="exercise-instruction">
+          <h4 id="exerciseName">Preparándote...</h4>
+          <p id="exerciseDescription">Encuentra un espacio cómodo</p>
+        </div>
+
+        <!-- Indicador de progreso -->
+        <div class="exercise-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="progress-text">
+            <span id="currentStep">1</span> de <span id="totalSteps">5</span>
+          </p>
+        </div>
+
+        <!-- Controles -->
+        <div class="exercise-controls">
+          <button class="control-btn" id="pauseExercise">
+            <span class="play-icon">▶</span>
+            <span class="pause-icon hidden">⏸</span>
+          </button>
+          <button class="control-btn" id="skipExercise">⏭️</button>
+          <button class="control-btn" id="restartExercise">🔄</button>
+        </div>
+      </div>
+    </div>
+    <audio id="medAudio" loop>
+      <source
+        src="musica/gamma-binaural-beats-enhance-brain-power-relaxing-music-for-study-161763.mp3"
+        type="audio/mp3"
+      />
+    </audio>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Bienestar Universitario © 2025 - Cuidando tu salud emocional</p>
+    </footer>
+    <script src="principal.js"></script>
+  </body>
+</html>

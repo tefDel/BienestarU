@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recursos</title>
+    <link rel="stylesheet" href="css/PaginaRecursos.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="menu-icon" id="menuToggle">
+        <img src="img/personalizar.png" alt="Menú" class="menu-img" />
+      </div>
+    </nav>
+    <main>
+      <a href="paginaPrincipal.html" class="btn-back">← Volver a Inicio</a>
+
+      <h2>Recursos para el bienestar</h2>
+      <p>Explora información sobre el estrés académico</p>
+
+      <!-- Sección de Videos con Carrusel -->
+      <div class="video-section">
+        <h3>Videos y animaciones</h3>
+
+        <div class="carousel-container">
+          <div class="carousel">
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/Cortometraje - Estrés Académico.mp4" type="video/mp4" />
+              </video>
+            </div>
+        
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/Cómo afecta el estrés a tu cerebro - Madhumita Murgia.mp4" type="video/mp4" />
+              </video>
+            </div>
+        
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/estrés académico.mp4" type="video/mp4" />
+              </video>
+            </div>
+        
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/Estrés Estudiantil.mp4" type="video/mp4" />
+              </video>
+            </div>
+        
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/Estrés y ansiedad_ ¿Qué es y qué podemos hacer_.mp4" type="video/mp4" />
+              </video>
+            </div>
+        
+            <div class="carousel-item">
+              <video controls>
+                <source src="vid/Un Trip de Salud Mental _ Casi Creativo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        
+          <!-- Flechas -->
+          <div class="carousel-controls">
+            <button class="carousel-btn left" onclick="goToStart()">«</button>
+            <button class="carousel-btn right" onclick="goToEnd()">»</button>
+          </div>
+        </div>
+        
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+          <span class="indicator active" onclick="goToSlide(0)"></span>
+          <span class="indicator" onclick="goToSlide(1)"></span>
+          <span class="indicator" onclick="goToSlide(2)"></span>
+          <span class="indicator" onclick="goToSlide(3)"></span>
+          <span class="indicator" onclick="goToSlide(4)"></span>
+          <span class="indicator" onclick="goToSlide(5)"></span>
+        </div>        
+        
+
+      <!-- Sección del Minijuego - Centrada -->
+      <div class="juego-section">
+        <section>
+          <div class="section-header">
+            <h3>Minijuego relajante</h3>
+          </div>
+          <div class="section-content">
+            <div class="juego-preview">
+              <iframe
+                src="https://itch.io/embed-upload/15561723?color=333333"
+                width="100%"
+                height="400"
+                frameborder="0"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <p>Haz clic para jugar y liberar tensiones.</p>
+            <p>Contraseña: raiden6768</p>
+            <a href="https://raidenalex.itch.io/brisalia" target="_blank"
+              >🎮 Jugar ahora</a
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      function scrollCarousel(direction) {
+        const carousel = document.querySelector(".carousel");
+        const itemWidth = carousel.querySelector(".carousel-item").offsetWidth;
+        carousel.scrollBy({
+          left: direction * (itemWidth + 20),
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <script src="recursos.js"></script>
+    <footer>
+      <p>
+        Todos los recursos son libres y creados por el equipo de estudiantes.
+      </p>
+    </footer>
+  </body>
+</html>

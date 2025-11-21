@@ -1,0 +1,659 @@
+/* Fuente base */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #fce4ec 0%, #fdfdf6 100%);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* CONTENEDOR */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* NOTIFICACIÓN */
+.notification {
+  width: 420px;
+  background: #ffffff;
+  padding: 18px 22px;
+  border-radius: 0 18px 18px 18px; /* redondo solo en derecha */
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  border-left: 6px solid #4caf50; /* color se cambia según tipo */
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+/* MOSTRAR */
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ICONO CONTENEDOR */
+.notification .icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.18); /* verde suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: #4caf50;
+  flex-shrink: 0;
+}
+
+/* TEXTOS */
+.notification .content {
+  flex: 1;
+}
+
+.notification .title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 4px 0;
+}
+
+.notification .message {
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+}
+
+/* BOTÓN CERRAR */
+.notification .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+.notification .close-btn:hover {
+  color: #333;
+}
+
+/* TIPOS */
+.notification.success {
+  border-left-color: #4caf50;
+}
+.notification.error {
+  border-left-color: #ff4d4d;
+}
+.notification.info {
+  border-left-color: #2196f3;
+}
+
+/* ===============================
+   PANEL DE PERSONALIZACIÓN CENTRADO
+   =============================== */
+
+/* Ícono hamburguesa en el header */
+.menu-icon {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin-left: 20px; /* IZQUIERDA */
+  margin-right: 0; /* Ningún margen derecho */
+}
+
+.menu-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.menu-img {
+  width: 40px;
+  height: 40px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* Glow al pasar el mouse */
+.menu-img:hover {
+  filter: drop-shadow(0 0 12px #c181c7) drop-shadow(0 0 20px #c681c7)
+    drop-shadow(0 0 28px #c381c7);
+  transform: scale(1.08);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel flotante CENTRADO */
+.custom-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  max-width: 92vw;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 30px 24px;
+  border-radius: 20px;
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2002;
+  text-align: center;
+  border: 3px solid #81c784;
+}
+
+.custom-panel.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-panel h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.custom-panel h3::before {
+  content: "";
+  font-size: 28px;
+}
+
+.custom-panel p {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+/* Input de color */
+.custom-panel input[type="color"] {
+  width: 100%;
+  height: 60px;
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-panel input[type="color"]:hover {
+  border-color: #81c784;
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(129, 199, 132, 0.2);
+}
+
+.custom-panel input[type="color"]:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+/* Botón dentro del panel */
+.panel-btn {
+  margin-top: 20px;
+  padding: 14px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #81c784, #4bc0c0);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(129, 199, 132, 0.3);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.panel-btn::before {
+  content: "🔄";
+  font-size: 18px;
+}
+
+.panel-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(129, 199, 132, 0.4);
+  background: linear-gradient(135deg, #66bb6a, #3fa89f);
+}
+
+.panel-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Animación de entrada */
+@keyframes panelEntrance {
+  from {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .custom-panel {
+    width: 90vw;
+    max-width: 340px;
+    padding: 24px 20px;
+  }
+
+  .menu-icon {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  .menu-img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+  }
+
+  .custom-panel h3 {
+    font-size: 20px;
+  }
+}
+/* Barra de navegación */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+  padding: 25px 30px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(244, 143, 177, 0.3);
+  position: relative;
+}
+
+/* Contenido principal */
+main {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #d81b60;
+  text-align: center;
+  font-weight: 600;
+}
+
+main > p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 50px;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* Sección de videos - Carrusel */
+.video-section {
+  margin-bottom: 60px;
+}
+
+.video-section h3 {
+  font-size: 2rem;
+  color: #c2185b;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* ✔ Contenedor más ancho */
+.carousel-container {
+  position: relative;
+  max-width: 1100px; /* Aumentado */
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 20px 60px;
+}
+
+/* ✔ Carrusel más ancho */
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ✔ Video más grande (75% del carrusel) */
+.carousel-item {
+  flex: 0 0 75%;
+  scroll-snap-align: center;
+}
+
+.carousel-item video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-controls {
+  position: absolute; /* ✔ correcto */
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.carousel-btn {
+  pointer-events: all;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f48fb1, #ec407a);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(236, 64, 122, 0.4);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.carousel-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(236, 64, 122, 0.5);
+}
+
+/* ✔ Indicadores funcionales */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Botón izquierdo */
+.carousel-btn.left {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Botón derecho */
+.carousel-btn.right {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f8bbd0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.indicator.active {
+  background: #ec407a;
+  width: 30px;
+  border-radius: 5px;
+}
+
+/* Sección del minijuego - Centrado */
+.juego-section {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(244, 143, 177, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(135deg, #f48fb1, #ec407a);
+}
+
+section:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(244, 143, 177, 0.25);
+}
+
+.section-header {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  padding: 30px;
+  text-align: center;
+}
+
+section h3 {
+  font-size: 1.8rem;
+  color: #c2185b;
+  margin: 0;
+  font-weight: 600;
+}
+
+.section-content {
+  padding: 40px 30px;
+  text-align: center;
+}
+
+section p {
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* Contenedor del minijuego */
+.juego-preview {
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.juego-preview img {
+  max-width: 150px;
+  filter: drop-shadow(0 4px 12px rgba(236, 64, 122, 0.3));
+}
+
+/* Botón de jugar */
+section a {
+  display: inline-block;
+  padding: 16px 50px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #f48fb1, #ec407a);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(236, 64, 122, 0.35);
+  margin: 0 auto;
+}
+
+section a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(236, 64, 122, 0.45);
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+}
+
+section a:active {
+  transform: translateY(0);
+}
+
+/* Botón de volver a inicio */
+.btn-back {
+  display: inline-block;
+  padding: 10px 24px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 20px;
+  background: #f48fb1;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(244, 143, 177, 0.3);
+}
+
+.btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(244, 143, 177, 0.4);
+  background: #ec407a;
+}
+
+.btn-back:active {
+  transform: translateY(0);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+  color: #fff;
+  padding: 30px 20px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  main {
+    padding: 30px 20px;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  main > p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  nav {
+    padding: 20px 20px;
+  }
+
+  .video-section h3 {
+    font-size: 1.6rem;
+  }
+
+  .carousel-container {
+    padding: 20px 50px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .juego-section {
+    max-width: 100%;
+  }
+
+  section h3 {
+    font-size: 1.5rem;
+  }
+
+  .section-header {
+    padding: 20px;
+  }
+
+  .section-content {
+    padding: 30px 20px;
+  }
+
+  section a {
+    padding: 14px 35px;
+    font-size: 1rem;
+  }
+
+  .juego-preview {
+    padding: 40px 20px;
+    min-height: 150px;
+  }
+
+  .juego-preview img {
+    max-width: 100px;
+  }
+}

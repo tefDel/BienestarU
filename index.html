@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienestar Universitario</title>
+    <link rel="stylesheet" href="css/screen.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="cover">
+      <div class="menu-icon" id="menuToggle">
+        <img src="img/personalizar.png" alt="Menú" class="menu-img" />
+      </div>
+
+      <div class="cover-left">
+        <img
+          src="https://i.pinimg.com/originals/c9/5a/4f/c95a4f6580181edff7aa269b6a034c62.gif"
+        />
+      </div>
+
+      <div class="cover-right">
+        <h1 class="title">Bienestar Universitario</h1>
+
+        <div class="profile-pic">
+          <img
+            id="preview"
+            src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          />
+          <input type="file" id="fileInput" accept="image/*" />
+        </div>
+
+        <form class="student-info">
+          <label>Nombre: <input type="text" /></label>
+          <label>Número de estudiante: <input type="text" /></label>
+          <button type="button" class="btn" id="ingresarBtn">Ingresar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Overlay para el panel -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Panel flotante de personalización -->
+    <aside class="custom-panel" id="customPanel">
+      <h3>Personaliza tu página</h3>
+      <p>Elige el color que más te guste:</p>
+      <input type="color" id="colorPicker" value="#81c784" />
+      <button id="resetBtn" class="panel-btn">Restaurar colores</button>
+    </aside>
+
+    <!-- Script principal -->
+    <script src="sketch.js"></script>
+  </body>
+</html>
